@@ -1,4 +1,8 @@
-# Teensy 2.0 replacement controller board for HHKB Lite 2
+Uses https://github.com/ncarandini/KiCad-RP-Pico
+
+# Pi Pico SMD controller relacement for HHKB Lite 2
+
+Based on the [Teensy 2.0 controller by thirteen37](https://github.com/thirteen37/HHKB-Lite-2-Teensy).
 
 This is a QMK-compatible replacement controller for the [HHKB Lite
 2](https://deskthority.net/wiki/HHKB_Lite), identified by model
@@ -9,22 +13,25 @@ popular compared to more expensive Professional versions that use
 Topre switches. But the wiring is simple and is a good first project
 for modding commercial keyboards.
 
-This replacement uses a [Teensy
-2.0](https://www.pjrc.com/store/teensy.html), which is cheap, has
-plenty of pins, and works well with the [QMK
-firmware](https://qmk.fm/). The entire controller board is replaced,
-so you will lose the built-in USB hub. You will gain all the benefits
-of the powerful QMK and similar Teensy-supported firmware.
+This replacement uses a [Raspberry Pi Pico or Pico W](https://www.raspberrypi.com/products/raspberry-pi-pico/), which is cheap, has
+plenty of pins, and is supported by works well with the [QMK
+firmware](https://github.com/qmk/qmk_firmware/blob/master/docs/platformdev_rp2040.md). Note, this
+board uses the Pico as an SMD component (for space considerations) and needs a Pico that
+*does not* have headers pre-soldered.
+
+If you don't mind losing the built-in USB ports, then only 4 parts are required: this PCB, two
+FFC connectors, and a Pi Pico. Optionally, you can add the necessary components to integrate a USB
+2.0 hub and keep using the built in USB ports -- with the added benefit that they are now USB 2.0!
 
 ## Steps
 
 1. Acquire/fabricate the PCB.
 2. Get the parts
 3. Disassemble the keyboard.
-4. Modify the USB cable you will be using and insert it into the Teensy.
-5. Solder the components on to the board. Take care to leave enough
-   room for the USB cable when soldering the Teensy.
-6. Reconnect the flex cables and insulate the backplate.
+4. Solder the components on to the board. Take care to leave enough
+   room for the USB cable.
+5. Reconnect the flex cables and insulate the backplate.
+6. Get the USB cable you will be using and insert it through the keyboard connector hole and plug it in to the Pi Pico.
 7. Flash your firmware and test your keyboard.
 8. Reassemble the shell.
 
@@ -34,20 +41,45 @@ The fabrication-ready files are in `plots/`. Just send them to your
 preferred fab. It is a pretty standard 1.6mm PCB with conservative via
 and track parameters that just about any shop can handle.
 
-You can also [order the PCBs through
-PCBway](https://www.pcbway.com/project/shareproject/HHKB_Lite_2___Teensy_2_0_controller.html). With
+> TODO: Change this to pi pico
+>
+> You can also [order the PCBs through PCBway](https://www.pcbway.com/project/shareproject/HHKB_Lite_2___Teensy_2_0_controller.html). With
 their new user discount, you would only have to pay shipping.
 
 ### Parts
 
-* 1 [Teensy 2.0](https://www.pjrc.com/store/teensy.html)
+#### Minimum Parts
+
+* 1 [Pi Pico or Pico W](https://www.raspberrypi.com/products/raspberry-pi-pico/) (WITHOUT headers)
 * 1 Molex Easy-On 14-pin 1.25mm pitch FFC connector 39-53-2145
 * 1 Molex Easy-On 8-pin 1.25mm pitch FFC connector 39-53-2085
-* 1/10" pitch thru-hole headers for Teensy
-* (White?) Mini-USB cable for Teensy
+* MicroUSB or USB-C cable for the Pi Pico, depending on which model (or clone) you have.
 
-The USB cable you get should have plastic plugs, because you will have
-to shave them down later.
+#### Optional Extras
+
+To re-enable the built-in USB ports, add:
+* FE1.1s IC, revision B or later, SSOP package
+* 12mhz crystal, 16-20pf, 4-pin 3225 package
+* (2x) 10uF capacitors, 1206 package
+* 2.7K-10k resistor, 805 package
+* A MicroUSB to USB-A cable you don't mind cutting apart
+
+For USB Status LEDs add:
+* (3x) 220-470 ohm resistors, 805 package
+* (5x) LED (any colour), 805 package
+
+### Bonus connectors
+
+There are several extra breakouts you can use for your own fun:
+
+* External reset/power connector (J1), needs:
+   - 2.7K-10k resistor, 805 package
+   - 2.54mm header, through-hole, 1x3 positions
+* 3rd, hidden USB 2.0 port (J5, back of board)
+   - Needs 2.54mm header, through-hole (but soldered as SMD), 4 positions
+* Breakout of the remaining unused Pi Pico Pins (J6)
+   - Needs 2.54mm header, through-hole, 2x4 positions
+   - Provides access to GP22, GP25, GP27, GP28, VBUS, and 3V3
 
 ### Disassembly
 
@@ -66,32 +98,35 @@ mechanism.
 
 ### Modify the USB cable
 
-The Mini-USB plug that goes to the Teensy needs to be shaved down to
-save about 1mm of thickness.
+> TODO: Change this to pi pico
+>
+>The Mini-USB plug that goes to the Teensy needs to be shaved down to save about 1mm of thickness.
 
 ![Shaved USB](images/shaved_usb.jpg)
 
 ### Soldering the board
 
-My recommended order is:
-1. Headers for Teensy on to the board
-2. Molex connectors
-3. Teensy
+> TODO: Change this to pi pico
+> My recommended order is:
+> 1. Headers for Teensy on to the board
+> 2. Molex connectors
+> 3. Teensy
 
 The Molex connectors are oriented in opposite directions, with pin 1
 (the edge with a little notch) of each connector facing each
 other. This is important because the flex cables and connectors are
 single sided.
 
-Note that the Teensy should be mounted upside down, on the same side
-as the connectors. This is to save a couple of millimeters of space
-from the stacked height of the connectors. You may have to trim down
-the header pins after you've soldered on the Teensy. The USB cable
-should still be able to fit.
-
-![Teensy upside down](images/teensy_mounting.jpg)
-
-![Teensy clearance](images/teensy_clearance.jpg)
+> TODO: Change this to pi pico
+> Note that the Teensy should be mounted upside down, on the same side
+> as the connectors. This is to save a couple of millimeters of space
+> from the stacked height of the connectors. You may have to trim down
+> the header pins after you've soldered on the Teensy. The USB cable
+> should still be able to fit.
+>
+> ![Teensy upside down](images/teensy_mounting.jpg)
+>
+> ![Teensy clearance](images/teensy_clearance.jpg)
 
 ### Connect flex cables and insulate the backplate
 
@@ -105,14 +140,14 @@ strips of electrical insulation tape here.
 
 ### Flash the firmware and test
 
-Plug in the USB cable to your computer and flash the firmware. There's
-a copy of the firmware with the default layout at
-`firmware/hhkblite2.hex`.
-
-Programming is done using [Teensy
-Loader](https://www.pjrc.com/teensy/loader.html). Since the Teensy is
-mounted upside down and the reset button no longer exposed, you can
-short the `RST` and `GND` pins instead.
+> Plug in the USB cable to your computer and flash the firmware. There's
+> a copy of the firmware with the default layout at
+> `firmware/hhkblite2.hex`.
+>
+> Programming is done using [Teensy
+> Loader](https://www.pjrc.com/teensy/loader.html). Since the Teensy is
+> mounted upside down and the reset button no longer exposed, you can
+> short the `RST` and `GND` pins instead.
 
 After a successful initial flash, you can use the `reset` key to enter
 flashing mode instead of having to open the keyboard. On my default
@@ -139,11 +174,13 @@ preferred PCB factory.
 The schematics are fairly straightforward, with 8 row pins and 14
 column pins:
 
-![Schematic](images/schematic.png)
+> TODO: Change this to pi pico
+> ![Schematic](images/schematic.png)
 
 The PCB layout is likewise simple:
 
-![PCB](images/pcb.png)
+> TODO: Change this to pi pico
+> ![PCB](images/pcb.png)
 
 
 ## Firmware
@@ -165,33 +202,41 @@ keyboards that do not have diodes to prevent ghosting: the matrix is
 designed to minimize ghosting from common key combinations but will
 never completely eliminate it.
 
-![Wiring matrix](images/wiring.png)
+> TODO: Change this to pi pico
+> ![Wiring matrix](images/wiring.png)
+>
+> The pin assignments are:
+>
+> | Matrix    | Pin |
+> |-----------|-----|
+> | *Rows*    |     |
+> | 0         | F5  |
+> | 1         | F4  |
+> | 2         | F1  |
+> | 3         | F0  |
+> | 4         | B0  |
+> | 5         | B1  |
+> | 6         | B2  |
+> | 7         | B3  |
+> | *Columns* |     |
+> | 0         | F6  |
+> | 1         | F7  |
+> | 2         | B6  |
+> | 3         | B5  |
+> | 4         | B4  |
+> | 5         | D7  |
+> | 6         | D6  |
+> | 7         | D4  |
+> | 8         | D5  |
+> | 9         | C7  |
+> | 10        | C6  |
+> | 11        | D3  |
+> | 12        | D2  |
+> | 13        | D1  |
+>
 
-The pin assignments are:
+## Credit
 
-| Matrix    | Pin |
-|-----------|-----|
-| *Rows*    |     |
-| 0         | F5  |
-| 1         | F4  |
-| 2         | F1  |
-| 3         | F0  |
-| 4         | B0  |
-| 5         | B1  |
-| 6         | B2  |
-| 7         | B3  |
-| *Columns* |     |
-| 0         | F6  |
-| 1         | F7  |
-| 2         | B6  |
-| 3         | B5  |
-| 4         | B4  |
-| 5         | D7  |
-| 6         | D6  |
-| 7         | D4  |
-| 8         | D5  |
-| 9         | C7  |
-| 10        | C6  |
-| 11        | D3  |
-| 12        | D2  |
-| 13        | D1  |
+[Original Teensy project by thirteen37](https://github.com/thirteen37/HHKB-Lite-2-Teensy).
+
+Pi Pico footprint is [konkers/KiCad-RP-Pico](https://github.com/konkers/).

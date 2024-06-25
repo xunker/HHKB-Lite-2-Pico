@@ -1,4 +1,6 @@
 /fp-info-cache
 /*.kicad_pcb-bak
+/*.kicad_sch-bak
 /*.sch-bak
 /HHKB Lite 2-cache.lib
+/HHKB Lite 2-backups

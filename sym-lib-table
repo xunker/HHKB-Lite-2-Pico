@@ -1,3 +1,5 @@
 (sym_lib_table
-  (lib (name teensy)(type Legacy)(uri ${KIPRJMOD}/libs/teensy_library/teensy.lib)(options "")(descr ""))
+  (lib (name "teensy")(type "Legacy")(uri "${KIPRJMOD}/libs/teensy_library/teensy.lib")(options "")(descr ""))
+  (lib (name "MCU_RaspberryPi_and_Boards")(type "KiCad")(uri "${KIPRJMOD}/RP-Pico Libraries/MCU_RaspberryPi_and_Boards.kicad_sym")(options "")(descr ""))
+  (lib (name "FE1.1S")(type "KiCad")(uri "${KIPRJMOD}/FE1.1S/FE1.1S.kicad_sym")(options "")(descr ""))
 )

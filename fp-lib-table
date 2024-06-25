@@ -1,4 +1,6 @@
 (fp_lib_table
-  (lib (name teensy)(type KiCad)(uri ${KIPRJMOD}/libs/teensy.pretty)(options "")(descr ""))
-  (lib (name Connector_Molex_Easy-On)(type KiCad)(uri ${KIPRJMOD}/libs/Connector_Molex_Easy-On.pretty)(options "")(descr ""))
+  (lib (name "teensy")(type "KiCad")(uri "${KIPRJMOD}/libs/teensy.pretty")(options "")(descr ""))
+  (lib (name "Connector_Molex_Easy-On")(type "KiCad")(uri "${KIPRJMOD}/libs/Connector_Molex_Easy-On.pretty")(options "")(descr ""))
+  (lib (name "MCU_RaspberryPi_and_Boards")(type "KiCad")(uri "${KIPRJMOD}/RP-Pico Libraries/MCU_RaspberryPi_and_Boards.pretty")(options "")(descr ""))
+  (lib (name "FE1")(type "KiCad")(uri "${KIPRJMOD}/FE1.1S")(options "")(descr ""))
 )
