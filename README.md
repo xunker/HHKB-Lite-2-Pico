@@ -1,4 +1,4 @@
-Uses https://github.com/ncarandini/KiCad-RP-Pico
+**IMPORTANT**: Current design has not been tested, and this readme has not be completely updated.
 
 # Pi Pico SMD controller relacement for HHKB Lite 2
 
