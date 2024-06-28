@@ -42,6 +42,13 @@ void loop() {
 }
 ```
 
+#### Bad config
+
+Even swapping GP9 for another pin line GP22 doesn't make that line come alive,
+so is my config bad?
+
+I should try swapping GP8-GP9 and see if 9 starts to work and 8 stops.
+
 ### Move Right-Side Mount Hole 1️⃣
 
 The mounting hole on the right side (nearest the Pi DEBUG connector) is too low
@@ -78,6 +85,15 @@ Need to change the pinout of the 3rd USB connector (J4) and USB Uplink connector
 (J2) to match the original USB KN connector. Simple swap of VBUS and GND is all
 that is needed.
 
+### xtal traces on FE1.1s do not need to be length-matched 2️⃣
+
+The traces are not a true differential pair, they're simply in-out, so that
+means they don't need to have the same length. That means I can mount the xtal
+squarely instead of at an angle (and maybe on the top copper instead of bottom).
+
+It also means I could use a different package than 3525, but I've already bought
+a dozen in this package...
+
 ### Different Parts for the membrane connection? 2️⃣
 
 This is a tough call.
@@ -98,3 +114,21 @@ make it so the Molex Easy-On can't be used.
 
 Missing a pad to connect the grounding strap for the metal plate. This can be
 connected to any GND spot on the PCB, but a specific pad would be nice.
+
+### Move extra GPIO connection to bottom of board 3️⃣
+
+Move the pins that are in JP6 to JP1, so all are accessible out the back of the
+case. That way they could be used as jumper blocks, too, if needed.
+It'll be a tight fit for the opening, so maybe using 2.0m headers instead of
+2.54mm is in order?
+
+It will need to be a 2x05 block, though only 9 pins are needed so could have
+the remaining pin as an N/C or key pin? Have it line up with VBUS so if you use
+a 2x05 connector and plug it in upside down, VBUS will remain disconnected and
+not ruin anything.
+
+#### Rework which pins are "bonus" 3️⃣
+
+To avoid walking across the whole board, consider shifting the column pins to
+the right by 4 so the "bonus" pins are GP8-GP11. That way they are a
+straight-shot to the connector.
