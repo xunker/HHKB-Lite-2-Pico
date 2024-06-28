@@ -4,26 +4,10 @@ Numbers indicate relative importance
 
 ## June 2024 Rev
 
-### Figure out why sole columns are not working 0️⃣
+### Figure out why GP9 columns are not working 0️⃣
 
-While testing, found that 5 column pins are not responding. I don't know if it
-is a configuration issue, or if I damaged the GPIO pins while cleaning flux off
-the PCB with an electric toothbrush.
-
-It's not an issue with the connectors, as I tried bridging the Pi's GPIO pads
-directly with a test lead.
-
-It might be that there are alternate modes enabled on those pins that are
-interfering with QMK, but seeing as how there are adjacent pins with similar
-functions which work, I don't think that's the case.
-
-#### Effected pins
-
-* `GP19` (SPI0 TX / I2C1 SCL)
-* `GP18` (SPI0 SCK / I2C1 SDA)
-* `GP17` (SPI0 CSn / I2C0 SCL / UART0 RX)
-* `GP13` (SPI1 CSn / I2C0 SCL / UART0 RX)
-* `GP9` (SPI1 CSn / I2C0 SCL / UART1 RX)
+While testing, found that 5 column pins are not responding. After disabling some
+optional features in QMK, I whittled that down to one pin not working, GP9.
 
 #### Not bad hardware
 
@@ -67,18 +51,21 @@ I don't know if this is an error in thirteen37's original design, or if their
 keyboard has the hole in a slightly different place (since their stock
 controller is also a little different from mine).
 
-A maintainable fix is to make the hole an ellipse (along the vertical/Y-axis)
-so that it can be used on any case. A 2:1 ratio is probably a good start
+At first I thought it needed to be moved along the vertical/Y-axis, but when I
+look at a printed overlay I think it needs to move toward the centre of the pcb.
+
+I'm not sure, so another (probably more extensible idea) is to make that hole
+quite a bit bigger, so it has a lot of adjustment play and can be cinched down
+using a large nylon fender washer.
 
 ### Fix alignment and spacing of membrane connectors 1️⃣
 
 On thirteen37's original design, J_Col1 (14-pin membrane connector) needs to be
-moved about 2.5mm to the right (away from J_Row1).
+moved about 2.5mm to the right (away from J_Row1). Or maybe they both need to
+come to the centre by 1.25mm, not sure.
 
-The miss-alignment is causing wrinkes in the membrane which in turn are causing
+The miss-alignment is causing wrinkles in the membrane which in turn are causing
 phantom key presses.
-
-It looks like the position of J_Row1 is correct, relative to the mounting holes.
 
 Like the mounting hole issue, I don't know if this is an issue with thirteen37's
 design, or if they're keyboard uses a different membrane. I can't think of a
