@@ -32,18 +32,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-// void keyboard_post_init_user(void) {
-//     // Customise these values to desired behaviour
-//     debug_enable = true;
-//     debug_matrix = true;
-//     // debug_keyboard=true;
-//     // debug_mouse=true;
+void keyboard_pre_init_user(void) {
+    gpio_set_pin_output(GP25);
+}
 
-
-//     // gpio_set_pin_output(GP25);
-
-// }
-
-// void matrix_scan_user(void) {
-//     // writePin(GP25, !gpio_read_pin(GP25));
-// }
+// credit: https://www.reddit.com/r/olkb/comments/fva7wq/comment/iy24i66/
+layer_state_t layer_state_set_user(layer_state_t state) {
+    if (IS_LAYER_ON_STATE(state, 0)) {
+        gpio_write_pin_low(GP25);
+    } else {
+        gpio_write_pin_high(GP25);
+    }
+    return state;
+}

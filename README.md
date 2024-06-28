@@ -232,6 +232,14 @@ ghosting from common key combinations but will never completely eliminate it.
 > | 13        | GP16     |
 >
 
+## Quirks
+
+It might seem like GP9 isn't working because there are no keypresses for that
+pin. But that's by design, it's a dedicated pin for `Fn`. Took me two days of
+debugging to notice that, so to help future people I've updated the QMK config
+to light up the built-in LED when Fn is pressed, so you can see it does
+something!
+
 ## Credit
 
 [Original Teensy project by

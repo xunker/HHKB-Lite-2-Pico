@@ -4,59 +4,6 @@ Numbers indicate relative importance
 
 ## June 2024 Rev
 
-### Figure out why GP9 columns are not working 0️⃣
-
-While testing, found that 5 column pins are not responding. After disabling some
-optional features in QMK, I whittled that down to one pin not working, GP9.
-
-#### Not bad hardware
-
-It's not a case of those GPIOs being damaged. A simple Arduino prog to verifies
-each of the above pins is working:
-
-```c
-#define TEST_PIN_COUNT 5
-int testPins[TEST_PIN_COUNT] = { D19, D18, D17, D13, D9 };
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
-
-  for (uint8_t i = 0; i < TEST_PIN_COUNT; i++) {
-    pinMode(testPins[i], INPUT_PULLUP);
-  }
-}
-
-bool lightLed = false;
-void loop() {
-  for (uint8_t i = 0; i < TEST_PIN_COUNT; i++) {
-    if (lightLed)
-      break;
-    if (!digitalRead(testPins[i]))
-      lightLed = true;
-  }
-
-  digitalWrite(LED_BUILTIN, lightLed);
-
-  lightLed = false;
-
-  delay(50);
-}
-```
-
-#### Bad config
-
-Even swapping GP9 for another pin line GP22 doesn't make that line come alive,
-so is my config bad?
-
-I should try swapping GP8-GP9 and see if 9 starts to work and 8 stops.
-
-Update: swapping GP8 and GP9 did what I expected; now GP8 doesn't respond. So it
-absolutely a config issue.
-
-Update Update: Looking at my keyboard.json, I see that there is only ONE entry
-in the layout matrix for column 1 (GP9). Is this the FN key?
-
-Yes, it IS the FN key. It's dedicated!
-
 ### Move Right-Side Mount Hole 1️⃣
 
 The mounting hole on the right side (nearest the Pi DEBUG connector) is too low
