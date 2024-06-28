@@ -49,6 +49,14 @@ so is my config bad?
 
 I should try swapping GP8-GP9 and see if 9 starts to work and 8 stops.
 
+Update: swapping GP8 and GP9 did what I expected; now GP8 doesn't respond. So it
+absolutely a config issue.
+
+Update Update: Looking at my keyboard.json, I see that there is only ONE entry
+in the layout matrix for column 1 (GP9). Is this the FN key?
+
+Yes, it IS the FN key. It's dedicated!
+
 ### Move Right-Side Mount Hole 1️⃣
 
 The mounting hole on the right side (nearest the Pi DEBUG connector) is too low
